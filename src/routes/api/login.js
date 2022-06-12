@@ -1,23 +1,3 @@
-// import clientPromise from '$lib/mongodb-client'
-// import { ObjectId } from 'mongodb'
-// import { serialize } from 'cookie'
-// import { v4 as uuidv4 } from 'uuid'
-
-// export async function post({ request }) {
-// 	const dbConnection = await clientPromise
-// 	const db = dbConnection.db('SkinsTracker')
-// 	const collection = db.collection('SkinsTracker')
-
-// 	const data = await collection.findOne({ _id: ObjectId('62923f1b36006ed1642ff7d5') })
-
-// 	return {
-// 		status: 200,
-// 		body: {
-// 			msg: await request.json(),
-// 		},
-// 	}
-// }
-
 import clientPromise from '$lib/mongodb-client'
 import { ObjectId } from 'mongodb'
 import { serialize } from 'cookie'

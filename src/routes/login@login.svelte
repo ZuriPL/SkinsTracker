@@ -6,8 +6,6 @@
     async function handleLogin() {
         const email = document.querySelector('#email').value
         const password = document.querySelector('#pass').value
-        console.log(email)
-        console.log(password)
         if (email == '' || password == '') return
         let res = await fetch('/api/login', {
             method: 'POST',
@@ -48,7 +46,7 @@
     }
     .form-container {
         border: 2px solid var(--border-color);
-        border-radius: 2rem;
+        border-radius: 1rem;
         padding: 1rem;
         position: relative;
         display: flex;
@@ -56,22 +54,21 @@
         gap: 0.5rem;
         flex-direction: column;
     }
-    .register {
+    .link {
         color: #5f91f0;
         margin-top: 0.75rem;
         font-size: 0.85rem;
         text-underline-offset: 1px;
     }
-    .register:hover {
+    .link:hover {
         color: #175dcf;
     }
     input {
         width: 16rem;
-        height: 1.25rem;
-        border-radius: 1rem;
+        border-radius: 0.4rem;
         border: 2px solid var(--border-color);
         outline: none;
-        padding: 0rem 0.25rem;
+        padding: 0.25rem;
     }
     input:focus {
         border: 2px solid #5f91f0;
@@ -81,7 +78,7 @@
         padding: 0.5rem 1rem;
         background-color: #5f91f0;
         color: white;
-        border-radius: 2rem;
+        border-radius: 0.75rem;
         margin-top: 1rem;
     }
     button:hover {
@@ -98,10 +95,10 @@
         <input type="email" id="email" />
         <label for="pass">Password:</label>
         <input type="password" id="pass" />
-        <ErrorMsg msg="Invalid login or password" show="{show}" />
+        <ErrorMsg msg="Invalid login or password" show="{show}" style="" />
 
         <button on:click="{handleLogin}">Login</button>
     </div>
 
-    <a href="/" class="register">Don't have an account? Register</a>
+    <a href="/signup" class="link">Don't have an account? Sign Up</a>
 </div>

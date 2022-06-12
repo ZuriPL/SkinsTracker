@@ -48,8 +48,7 @@
         left: 0;
         bottom: 1px;
         border-bottom: 2px solid var(--border-color);
-        padding: 2rem max(calc(calc(100vw - 750px) / 2), 4rem);
-        padding-bottom: 4rem;
+        padding: 1.5rem max(calc(calc(100vw - 750px) / 2), 4rem);
         transition: transform 500ms cubic-bezier(0.33, -0.01, 0.29, 0.99);
         width: 100%;
         background-color: white;
@@ -57,11 +56,11 @@
         grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     }
     section li {
-        margin-block: 0.25rem;
+        margin-block: 0.5rem;
         list-style: none;
     }
     .menu-header {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
     }
     .open .menu {
         transform: translateY(100%);
@@ -91,6 +90,9 @@
     }
     .menu section {
         padding-right: 5rem;
+    }
+    ul {
+        margin-bottom: 2rem;
     }
 </style>
 
@@ -148,6 +150,7 @@
                 <li><a href="/">Change email</a></li>
                 <li><a href="/">Change password</a></li>
                 <li><a href="/api/logout">Log out</a></li>
+                <li><a href="/">Delete account</a></li>
             </ul>
         </section>
         <section>
