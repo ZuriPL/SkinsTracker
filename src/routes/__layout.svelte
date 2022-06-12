@@ -124,6 +124,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>SkinsTracker</title>
+</svelte:head>
+
 <nav class="{isOpen}">
     <section>
         <a href="/" style="text-decoration: none;">
