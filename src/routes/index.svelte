@@ -89,7 +89,7 @@
 
 <div class="center main">
 
-    <h2>Your Tracked skins:</h2>
+    <h2>Your skins:</h2>
     
     <div class="slots-grid">
         {#if $user == ''} 
