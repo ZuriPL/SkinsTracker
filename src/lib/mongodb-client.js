@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
 import { dev } from '$app/env'
+import dotenv from 'dotenv'
 dotenv.config()
 
 import { MongoClient } from 'mongodb'
