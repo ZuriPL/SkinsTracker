@@ -9,7 +9,7 @@
         --border-color: #e5e5e5;
     }
     nav { 
-        padding: 1.5rem 4rem;
+        padding: 1.5rem 3rem;
         border-bottom: 2px solid var(--border-color);
         display: flex;
         justify-content: center;
@@ -156,7 +156,7 @@
         <section>
             <h2 class="menu-header">Site</h2>
             <ul>
-                <li><a href="/">Switch to {mode} mode</a></li>
+                <li><a href="/">Switch to {mode == 'dark' ? 'light' : 'dark'} mode</a></li>
                 <li><a href="/">About</a></li>
                 <li><a href="/">FAQ</a></li>
                 <li><a href="/">Help/Support</a></li>
