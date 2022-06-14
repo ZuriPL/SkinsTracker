@@ -99,6 +99,7 @@
 <script>
     import { user } from '$lib/user.js' 
     import { onMount } from 'svelte'
+    import { SvelteToast } from '@zerodevx/svelte-toast'
 
     let isOpen = false
     let mode = 'light'
@@ -129,7 +130,7 @@
 <svelte:head>
     <title>SkinsTracker</title>
 </svelte:head>
-
+<SvelteToast options={{ intro: { x: -200 } }} />
 <nav class="{isOpen}">
     <section>
         <a href="/" style="text-decoration: none;">

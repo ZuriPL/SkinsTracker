@@ -4,7 +4,6 @@
         <div id="search-result">
             <input autocomplete="off" type="text" on:input="{handleInput}" on:focus="{handleInput}" on:blur="{handleRemoveList}" id="searchbar"/>
         </div>
-        <ErrorMsg show="{show}" msg="Cannot add the same skin twice" style="margin-top: 0.5rem;" />
         {#if id}
             <button on:click="{handleAdd}">Add</button>
         {:else}
@@ -119,14 +118,14 @@
 </style>
 
 <script>
-    import ErrorMsg from './errorMsg.svelte';
     import { user } from '$lib/user.js'
-import { get_root_for_style } from 'svelte/internal';
+    import { goto } from '$app/navigation'
+    import myToast from '$lib/toast.js'
+    import { toast } from '@zerodevx/svelte-toast'
 
     let id
     let name
     let lastValue = ''
-    let show
 
     function handleRemoveList() {
         document.querySelector('div[list]')?.remove()
@@ -134,7 +133,7 @@ import { get_root_for_style } from 'svelte/internal';
 
     function handleClose() {
         document.querySelector('.add-popup-bg').classList.add('hide')
-        show = false
+        toast.pop(0)
     }
 
     function ready(e, suggestions) {
@@ -176,11 +175,9 @@ import { get_root_for_style } from 'svelte/internal';
         }
     }
 
-    import { goto } from '$app/navigation'
     async function handleAdd() {
         if ($user.skins.includes(id)) {
-            show = true
-            return
+            return myToast('Cannot add the same skin twice', true)
         }
         let res1 = await fetch(`/api/setSkin`, {
             method: 'POST',
@@ -191,12 +188,11 @@ import { get_root_for_style } from 'svelte/internal';
         let data = await res1.json()
         if (Object.keys(data).length === 0) return goto('/login?reason=nologin')
         document.querySelector('.add-popup-bg').classList.add('hide')
-        show = false
         document.querySelector('#searchbar').value = ''
         id = undefined
         name = undefined
         let res2 = await fetch('/api/getUser')
-        let obj = await res.json()
+        let obj = await res2.json()
         user.set(obj)
     }
 </script>
