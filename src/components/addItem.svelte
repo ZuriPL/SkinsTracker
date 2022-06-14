@@ -121,6 +121,7 @@
 <script>
     import ErrorMsg from './errorMsg.svelte';
     import { user } from '$lib/user.js'
+import { get_root_for_style } from 'svelte/internal';
 
     let id
     let name
@@ -175,23 +176,26 @@
         }
     }
 
+    import { goto } from '$app/navigation'
     async function handleAdd() {
         if ($user.skins.includes(id)) {
             show = true
             return
         }
-        await fetch(`/api/setSkin`, {
+        let res1 = await fetch(`/api/setSkin`, {
             method: 'POST',
             body: JSON.stringify({
                 id, name
             })
         })
+        let data = await res1.json()
+        if (Object.keys(data).length === 0) return goto('/login?reason=nologin')
         document.querySelector('.add-popup-bg').classList.add('hide')
         show = false
         document.querySelector('#searchbar').value = ''
         id = undefined
         name = undefined
-        let res = await fetch('/api/getUser')
+        let res2 = await fetch('/api/getUser')
         let obj = await res.json()
         user.set(obj)
     }

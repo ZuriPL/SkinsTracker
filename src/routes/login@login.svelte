@@ -1,8 +1,30 @@
 <script>
     import {user} from '$lib/user'
+    import { goto } from '$app/navigation'
+    import { onMount } from 'svelte/internal';
+    import { SvelteToast, toast } from '@zerodevx/svelte-toast'
     import ErrorMsg from '../components/errorMsg.svelte'
     let show
+    let urlParams
 
+    onMount(() => {
+        urlParams = new URLSearchParams(location.search)
+        if (urlParams.has('reason') && urlParams.get('reason') === 'nologin') {
+            toast.push(`
+            <p style="display:flex;align-items:center;gap:0.5rem;font-size:1.125rem;padding-right:0.5rem"><svg style="width:35px;height:35px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z" />
+            </svg> Session expired, please log in</p>`, 
+            {
+                theme: {
+                    '--toastBackground': '#f81f1f',
+                    '--toastBarBackground': '#bb0b0b',
+                    '--toastBorderRadius': '0.5rem',
+                    '--toastWidth': 'auto'
+                },
+                dismissable: false
+            })
+        }
+    })
     async function handleLogin() {
         const email = document.querySelector('#email').value
         const password = document.querySelector('#pass').value
@@ -20,17 +42,22 @@
             return
         }
         user.set(text)
-        console.log(window.location.toString().split('=')[1])
-        if (window.location.toString().split('=')[1] != undefined) {
-            window.location = window.location.toString().split('=')[1]
+        if (urlParams.has('from')) {
+            goto(urlParams.get('from'))
         } else {
-            window.location = '/'
+            goto('/')
         }
     }
 </script>
 
 
 <style>
+    :root {
+        --toastContainerTop: auto;
+        --toastContainerRight: auto;
+        --toastContainerBottom: 1.5rem;
+        --toastContainerLeft: 2rem;
+    }
     h2 {
         font-size: 4rem;
         margin-bottom: 3rem;
@@ -78,13 +105,15 @@
         padding: 0.5rem 1rem;
         background-color: #5f91f0;
         color: white;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         margin-top: 1rem;
     }
     button:hover {
         background-color: #4480de;
     }
 </style>
+
+<SvelteToast options={{ intro: { x: -100 } }} />
 
 <div class="center main">
 

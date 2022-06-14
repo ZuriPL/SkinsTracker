@@ -1,5 +1,6 @@
 <script>
     import {user} from '$lib/user'
+    import { goto } from '$app/navigation'
     import ErrorMsg from '../components/errorMsg.svelte'
     let show1
     let show2
@@ -37,11 +38,7 @@
         user.set(text2)
 
         console.log(window.location.toString().split('=')[1])
-        if (window.location.toString().split('=')[1] != undefined) {
-            window.location = window.location.toString().split('=')[1]
-        } else {
-            window.location = '/'
-        }
+        goto('/')
     }
 </script>
 
@@ -94,7 +91,7 @@
         padding: 0.5rem 1rem;
         background-color: #5f91f0;
         color: white;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         margin-top: 1rem;
     }
     button:hover {
