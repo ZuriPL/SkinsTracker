@@ -2,32 +2,18 @@
     import {user} from '$lib/user'
     import { goto } from '$app/navigation'
     import { onMount } from 'svelte/internal';
-    import { SvelteToast, toast } from '@zerodevx/svelte-toast'
-    import ErrorMsg from '../components/errorMsg.svelte'
-    let show
+    import toast from '$lib/toast.js'
     let urlParams
+    let email
+    let password
 
     onMount(() => {
         urlParams = new URLSearchParams(location.search)
         if (urlParams.has('reason') && urlParams.get('reason') === 'nologin') {
-            toast.push(`
-            <p style="display:flex;align-items:center;gap:0.5rem;font-size:1.125rem;padding-right:0.5rem"><svg style="width:35px;height:35px" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z" />
-            </svg> Session expired, please log in</p>`, 
-            {
-                theme: {
-                    '--toastBackground': '#f81f1f',
-                    '--toastBarBackground': '#bb0b0b',
-                    '--toastBorderRadius': '0.5rem',
-                    '--toastWidth': 'auto'
-                },
-                dismissable: false
-            })
+            toast('Session expired, please log in')
         }
     })
     async function handleLogin() {
-        const email = document.querySelector('#email').value
-        const password = document.querySelector('#pass').value
         if (email == '' || password == '') return
         let res = await fetch('/api/login', {
             method: 'POST',
@@ -38,8 +24,7 @@
         })
         let text = await res.json()
         if (text.error != undefined) {
-            show = true
-            return
+            return toast('Invalid login or password')
         }
         user.set(text)
         if (urlParams.has('from')) {
@@ -113,7 +98,7 @@
     }
 </style>
 
-<SvelteToast options={{ intro: { x: -100 } }} />
+
 
 <div class="center main">
 
@@ -121,10 +106,9 @@
     
     <div class="form-container">
         <label for="email">Email:</label>
-        <input type="email" id="email" />
+        <input bind:value={email} type="email" id="email" />
         <label for="pass">Password:</label>
-        <input type="password" id="pass" />
-        <ErrorMsg msg="Invalid login or password" show="{show}" style="" />
+        <input bind:value={password} type="password" id="pass" />
 
         <button on:click="{handleLogin}">Login</button>
     </div>

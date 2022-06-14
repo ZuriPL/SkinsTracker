@@ -1,17 +1,15 @@
 <script>
     import {user} from '$lib/user'
     import { goto } from '$app/navigation'
-    import ErrorMsg from '../components/errorMsg.svelte'
-    let show1
-    let show2
+    import toast from '$lib/toast.js'
+    let email
+    let password
+    let password2
+    
     
     async function handleSignUp() {
-        show1 = false
-        show2 = false
-        const email = document.querySelector('#email').value
-        const password = document.querySelector('#pass').value
         if (email == '' || password == '') return
-        if (document.querySelector('#confirm-pass').value != password) return show2 = true
+        if (password != password2) return toast(`Passwords don't match`)
         let res1 = await fetch('/api/signup', {
             method: 'POST',
             body: JSON.stringify({
@@ -22,8 +20,7 @@
         let text1 = await res1.json()
         
         if (text1.error != undefined) {
-            show1 = true
-            return
+            return toast('User with this email already exists')
         }
 
         let res2 = await fetch('/api/login', {
@@ -37,7 +34,6 @@
 
         user.set(text2)
 
-        console.log(window.location.toString().split('=')[1])
         goto('/')
     }
 </script>
@@ -105,13 +101,11 @@
     
     <div class="form-container">
         <label for="email">Email:</label>
-        <input type="email" id="email" />
+        <input bind:value={email} type="email" id="email" />
         <label for="pass">Password:</label>
-        <input type="password" id="pass" />
+        <input bind:value={password} type="password" id="pass" />
         <label for="confirm-pass">Confirm password:</label>
-        <input type="password" id="confirm-pass" />
-        <ErrorMsg msg="User already exists" show="{show1}" style="" />
-        <ErrorMsg msg="Passwords don't match" show="{show2}" style="" />
+        <input bind:value={password2} type="password" id="confirm-pass" />
 
         <button on:click="{handleSignUp}">Sign Up</button>
     </div>
