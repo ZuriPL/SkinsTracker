@@ -3,9 +3,13 @@
     export let id;
     export let counter;
 
+    import { createEventDispatcher } from 'svelte'
     import { user } from '$lib/user.js'
 
-    async function deleteSkin(name, id) {
+    const dispatch = createEventDispatcher()
+
+    async function deleteSkin() {
+        dispatch('deleteskin')
         await fetch(`/api/setSkin`, {
             method: 'DELETE',
             body: JSON.stringify({
@@ -31,7 +35,7 @@
     .gray {
         background-color: var(--border-color);
     }
-    p > span {
+    div > span {
         display: inline-block;
         width: 3.5ch;
     }
@@ -46,11 +50,12 @@
     button:hover path {
         fill: red !important;
     }
+
 </style>
 
-<div class="item {counter % 2 == 0 ? 'gray' : ''}">
-    <p id="{id}"><span>{counter}.</span>{name}</p>
-    <button on:click="{() => deleteSkin(name, id)}"><svg style="width:16px;height:16px" viewBox="0 0 24 24">
+<div id="{id}" class="item {counter % 2 == 0 ? 'gray' : ''}">
+    <div style="display:flex;"><span>{counter}.</span><p>{name}</p></div>
+    <button on:click="{deleteSkin}"><svg style="width:16px;height:16px" viewBox="0 0 24 24">
         <path fill="black" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
     </svg></button>
 </div>

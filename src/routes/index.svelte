@@ -20,8 +20,12 @@
             skins.push(handler(id))
         });
 
-        Promise.all(skins).then(skins => items = skins)
+        Promise.all(skins).then(skins => setItems(skins))
 
+    }
+
+    function setItems(arr) {
+        items = arr
     }
 
     function showPopup() {
@@ -99,7 +103,10 @@
         {:else}
         <div class="wrapper">
             {#each items as item}
-            <Item name="{item.name}" id="{item.id}" counter="{items.indexOf(item) + 1}"/>
+            <Item name="{item.name}" id="{item.id}" counter="{items.indexOf(item) + 1}" on:deleteskin="{_ => {
+                items.splice(items.findIndex(el => el.id === item.id), 1)
+                items = items
+            }}"/>
             {/each}
         </div>
         {/if}
@@ -110,5 +117,7 @@
         </svg>
     </button>
 
-    <AddItem />
+    <AddItem on:additem="{e => {
+        items = [...items, e.detail]
+    }}" />
 </div>

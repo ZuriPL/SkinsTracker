@@ -8,6 +8,9 @@
     :global(:root) {
         --border-color: #e5e5e5;
     }
+    :global(.hide) {
+        display: none !important;
+    }
     nav { 
         padding: 1.5rem 3rem;
         border-bottom: 2px solid var(--border-color);

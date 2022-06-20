@@ -122,6 +122,9 @@
     import { goto } from '$app/navigation'
     import myToast from '$lib/toast.js'
     import { toast } from '@zerodevx/svelte-toast'
+    import { createEventDispatcher } from 'svelte'
+
+    const dispatch = createEventDispatcher()
 
     let id
     let name
@@ -179,6 +182,10 @@
         if ($user.skins.includes(id)) {
             return myToast('Cannot add the same skin twice', true)
         }
+        document.querySelector('.add-popup-bg').classList.add('hide')
+        dispatch('additem', {
+            name, id
+        })
         let res1 = await fetch(`/api/setSkin`, {
             method: 'POST',
             body: JSON.stringify({
@@ -187,7 +194,6 @@
         })
         let data = await res1.json()
         if (Object.keys(data).length === 0) return goto('/login?reason=nologin')
-        document.querySelector('.add-popup-bg').classList.add('hide')
         document.querySelector('#searchbar').value = ''
         id = undefined
         name = undefined
