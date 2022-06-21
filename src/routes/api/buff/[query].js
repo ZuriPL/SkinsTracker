@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
+// -
 
 export async function get({ params }) {
 	let data = await fetch(`https://buff.163.com/api/market/search/suggest?text=${params.query}&game=csgo`, {
