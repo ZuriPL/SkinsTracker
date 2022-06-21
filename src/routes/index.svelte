@@ -5,16 +5,16 @@
 
     let items = []
 
+    async function handler(id) {
+        let res = await fetch(`/api/getSkin/${id}`)
+        let skinRes = await res.json()
+        skinRes.id = id
+        return skinRes
+    }
+
     $: if ($user != '') {
         let skins = []
         let skinsIds = $user.skins
-
-        async function handler(id) {
-            let res = await fetch(`/api/getSkin/${id}`)
-            let skinRes = await res.json()
-            skinRes.id = id
-            return skinRes
-        }
 
         skinsIds.forEach(id => {
             skins.push(handler(id))

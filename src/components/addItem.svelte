@@ -136,6 +136,9 @@
 
     function handleClose() {
         document.querySelector('.add-popup-bg').classList.add('hide')
+        document.querySelector('#searchbar').value = ''
+        id = undefined
+        name = undefined
         toast.pop(0)
     }
 

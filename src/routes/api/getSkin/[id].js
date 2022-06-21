@@ -11,5 +11,8 @@ export async function get({ params }) {
 	return {
 		status: 200,
 		body: data.skins[params.id],
+		headers: {
+			'Cache-Control': 'no-store, no-cache',
+		},
 	}
 }
