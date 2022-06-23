@@ -67,7 +67,7 @@
         flex-direction: column;
     }
     .link {
-        color: #5f91f0;
+        color: var(--link-color);
         margin-top: 0.75rem;
         font-size: 0.85rem;
         text-underline-offset: 1px;
@@ -83,18 +83,18 @@
         padding: 0.25rem;
     }
     input:focus {
-        border: 2px solid #5f91f0;
+        border: 2px solid var(--accent-color);
     }
     button {
         all: unset;
         padding: 0.5rem 1rem;
-        background-color: #5f91f0;
+        background-color: var(--accent-color);
         color: white;
         border-radius: 0.5rem;
         margin-top: 1rem;
     }
     button:hover {
-        background-color: #4480de;
+        background-color: var(--accent-darker);
     }
 </style>
 

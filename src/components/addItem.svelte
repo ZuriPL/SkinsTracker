@@ -34,7 +34,7 @@
         position: relative;
     }
     #search-result :global(div[list]) {
-        background-color: white;
+        background-color: var(--background-color);
         list-style: none;
         box-shadow: 2px 2px 8px hsla(0 0% 10% / 0.3);
         border-radius: 0.75rem;
@@ -56,7 +56,7 @@
         border-radius: 1rem;
         box-shadow: 2px 2px 8px hsla(0 0% 10% / 0.3);
         width: 300px;
-        background-color: white;
+        background-color: var(--background-color);
         position: absolute;
         left: 50%;
         top: 50%;

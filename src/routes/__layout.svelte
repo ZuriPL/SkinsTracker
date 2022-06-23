@@ -4,9 +4,15 @@
         margin: 0px;
         font-family: 'Roboto', sans-serif;
         box-sizing: border-box;
+        color: var(--text-color);
     }
     :global(:root) {
         --border-color: #e5e5e5;
+        --background-color: white;
+        --text-color: black;
+        --accent-color: #5f91f0;
+        --accent-darker: #4480de;
+        --link-color: #487ad6;
     }
     :global(.hide) {
         display: none !important;
@@ -19,23 +25,23 @@
         align-items: center;
         position: relative;
         z-index: 100;
-        background-color: white;
+        background-color: var(--background-color);
     }
     nav > section {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: min(100vw, 750px);
-        background-color: white;
+        background-color: var(--background-color);
         z-index: 1;
     }
     h1 {
         font-size: 2em;
-        color: black;
+        color: var(--text-color);
     }
     a {
         text-underline-offset: 1px;
-        color: #487ad6;
+        color: var(--link-color);
     }
     .hamburger {
         all: unset;
@@ -43,7 +49,7 @@
         padding: 0.25rem;
     }
     .hamburger:hover, .open .hamburger {
-        outline: 1px solid #487ad6;
+        outline: 1px solid var(--accent-color);
         border-radius: 0.25rem;
     }
     .menu {
@@ -86,7 +92,7 @@
         content: '';
         width: 100%;
         height: 100%;
-        background-color: white;
+        background-color: var(--background-color);
         position: absolute;
         top: 0;
         left: 0;

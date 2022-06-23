@@ -5,13 +5,6 @@
 
     let items = []
 
-    async function handler(id) {
-        let res = await fetch(`/api/getSkin/${id}`)
-        let skinRes = await res.json()
-        skinRes.id = id
-        return skinRes
-    }
-
     $: if ($user != '') {
         let skins = []
         let skinsIds = $user.skins
@@ -21,11 +14,17 @@
         });
 
         Promise.all(skins).then(skins => setItems(skins))
-
     }
 
     function setItems(arr) {
         items = arr
+    }
+
+    async function handler(id) {
+        let res = await fetch(`/api/getSkin/${id}`)
+        let skinRes = await res.json()
+        skinRes.id = id
+        return skinRes
     }
 
     function showPopup() {
@@ -65,24 +64,23 @@
         height: 0.5rem;
     }
     ::-webkit-scrollbar-thumb {
-        background-color: #5f91f0;
+        background-color: var(--accent-color);
         border-radius: 100vh;
     }
     ::-webkit-scrollbar-thumb:hover {
-        background-color: #4480ee;
+        background-color: var(--accent-darker);
     }
     #add-item {
         all: unset;
         border-radius: 100%;
         padding: 0.75rem;
-        background-color: #5f91f0;
-        box-shadow: 2px 2px 6px hsla(0 0% 00% / 0.4);
-        color: white;
+        background-color: var(--accent-color);
+        box-shadow: 2px 2px 6px hsla(0 0% 0% / 0.4);
         height: 33px;
         margin-top: 1.5rem;
     }
     #add-item:hover {
-        background-color: #4480ee;
+        background-color: var(--accent-darker);
     }
     .spinner-container {
         display: grid;
@@ -113,7 +111,7 @@
     </div>
     <button id="add-item" on:click="{showPopup}">
         <svg style="width:33px;height:33px" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+            <path fill="white" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
         </svg>
     </button>
 
