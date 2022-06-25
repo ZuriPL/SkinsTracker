@@ -111,7 +111,6 @@
     import { SvelteToast } from '@zerodevx/svelte-toast'
 
     let isOpen = false
-    let mode = 'light'
 
     async function checkUser() {
         let res = await fetch('/api/validateSession')
@@ -166,7 +165,6 @@
         <section>
             <h2 class="menu-header">Site</h2>
             <ul>
-                <li><a href="/">Switch to {mode == 'dark' ? 'light' : 'dark'} mode</a></li>
                 <li><a href="/">About</a></li>
                 <li><a href="/">FAQ</a></li>
                 <li><a href="/">Help/Support</a></li>

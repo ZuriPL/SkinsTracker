@@ -2,7 +2,14 @@
     <div class="add-popup">
         <h2 class="popup-header">New</h2>
         <div id="search-result">
-            <input autocomplete="off" type="text" on:input="{handleInput}" on:focus="{handleInput}" on:blur="{handleRemoveList}" id="searchbar"/>
+            <input autocomplete="off" type="text" bind:value="{inputValue}" on:input="{handleInput}" on:focus="{handleInput}" on:blur="{handleRemoveList}" id="searchbar"/>
+            <div list>
+                {#each suggestions as suggestion}
+                    <li class="option">
+                        <button id="{suggestion.goods_ids}" on:mousedown|self="{handleClick}">{suggestion.option}</button>
+                    </li>
+                {/each}
+            </div>
         </div>
         {#if id}
             <button on:click="{handleAdd}">Add</button>
@@ -42,14 +49,19 @@
         position: absolute;
     }
     
-    #search-result :global(div[list] button) {
+    .option {
         all: unset;
-        padding: 0.2rem;
         display: block;
         width: 100%;
+        cursor: pointer;
     }
-    #search-result :global(div[list] button:hover) {
+    .option:hover {
         background-color: var(--border-color);
+    }
+    .option button {
+        all: unset !important;
+        width: 100%;
+        padding: 0.2rem;
     }
     .add-popup {
         padding: 1rem;
@@ -92,20 +104,20 @@
         display: block;
     }
     #searchbar:focus {
-        border-color: #5f91f0;
+        border-color: var(--accent-color);
     }
     button:not(#close) {
         all: unset;
         padding: 0.5rem 1rem;
-        background-color: #5f91f0;
-        color: white;
+        background-color: var(--accent-color);
+        color: white; /* ! */
         border-radius: 0.75rem;
         margin-top: 1rem;
         display: grid;
         place-items: center;
     }
     button:not(#close):hover {
-        background-color: #4480de;
+        background-color: var(--accent-darker);
     }
     button.disabled {
         background-color: var(--border-color) !important;
@@ -126,59 +138,36 @@
 
     const dispatch = createEventDispatcher()
 
-    let id
-    let name
-    let lastValue = ''
-
+    let id = ''
+    let name = ''
+    let inputValue = ''
+    let suggestions = []
+    
     function handleRemoveList() {
-        document.querySelector('div[list]')?.remove()
+        suggestions = []
     }
 
     function handleClose() {
         document.querySelector('.add-popup-bg').classList.add('hide')
-        document.querySelector('#searchbar').value = ''
-        id = undefined
-        name = undefined
+        inputValue = ''
+        id = ''
+        name = ''
         toast.pop(0)
     }
 
-    function ready(e, suggestions) {
-        if (e.target.value === suggestions[0].option) { 
-            id = suggestions[0].goods_ids
-            name = suggestions[0].option
+    async function handleInput() {
+        if (inputValue === '') return handleRemoveList()
+        let res = await fetch(`/api/buff/${inputValue}`)
+        let suggestionsRes = await res.json()
+        if (document.querySelector('#searchbar') == document.activeElement) {
+            suggestions = suggestionsRes.res.data.suggestions
         }
     }
-    
-    async function handleInput(e) {
-        if (lastValue !== e.target.value) id = undefined 
-        lastValue = e.target.value
-        if (e.target.value == '') {
-            handleRemoveList()
-            return
-        }
-        let res = await fetch(`/api/buff/${e.target.value}`)
-        let suggestions = await res.json()
-        ready(e, suggestions.res.data.suggestions)
-        
-        let suggestionsList = document.createElement('div')
-        suggestionsList.setAttribute('list', '')
-        for (const skin of suggestions.res.data.suggestions) {
-            let suggestionElement = document.createElement('button')
-            suggestionElement.textContent = skin.option
-            suggestionElement.classList.add('option')
-            suggestionElement.setAttribute('id', skin['goods_ids'])
-            suggestionElement.addEventListener('mousedown', ev => {
-                if (ev.button != 0) return
-                document.querySelector('#searchbar').value = ev.target.textContent
-                ready(e, [{ option: ev.target.textContent, goods_ids: ev.target.id }], true)
-                lastValue = ev.target.textContent
-            })
-            suggestionsList.appendChild(suggestionElement)
-        }
-        document.querySelector('div[list]')?.remove()
-        if (document.querySelector('#searchbar') === document.activeElement) {
-            document.querySelector('#search-result').appendChild(suggestionsList)
-        }
+
+    function handleClick(e) {
+        name = e.target.textContent
+        id = e.target.getAttribute('id')
+        inputValue = name
     }
 
     async function handleAdd() {
@@ -198,8 +187,8 @@
         let data = await res1.json()
         if (Object.keys(data).length === 0) return goto('/login?reason=nologin')
         document.querySelector('#searchbar').value = ''
-        id = undefined
-        name = undefined
+        id = ''
+        name = ''
         let res2 = await fetch('/api/getUser')
         let obj = await res2.json()
         user.set(obj)

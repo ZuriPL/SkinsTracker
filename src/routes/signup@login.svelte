@@ -86,7 +86,7 @@
         all: unset;
         padding: 0.5rem 1rem;
         background-color: var(--accent-color);
-        color: white;
+        color: white; /*!*/
         border-radius: 0.5rem;
         margin-top: 1rem;
     }
