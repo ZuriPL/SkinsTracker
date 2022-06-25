@@ -4,7 +4,6 @@
         margin: 0px;
         font-family: 'Roboto', sans-serif;
         box-sizing: border-box;
-        color: var(--text-color);
     }
     :global(:root) {
         --border-color: #e5e5e5;
@@ -13,6 +12,8 @@
         --accent-color: #5f91f0;
         --accent-darker: #4480de;
         --link-color: #487ad6;
+
+        color: var(--text-color);
     }
     :global(.hide) {
         display: none !important;

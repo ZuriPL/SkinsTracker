@@ -11,6 +11,7 @@ function toastWrapper(msg, dis = false) {
 				'--toastBarBackground': '#bb0b0b',
 				'--toastBorderRadius': '0.5rem',
 				'--toastWidth': 'auto',
+				'--toastColor': '#fff',
 			},
 			dismissable: dis,
 		}
