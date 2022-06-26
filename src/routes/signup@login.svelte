@@ -10,11 +10,16 @@
     async function handleSignUp() {
         if (email == '' || password == '') return
         if (password != password2) return toast(`Passwords don't match`)
+        let passwordHash = email.concat(password)
+        passwordHash = new TextEncoder().encode(passwordHash)
+        passwordHash = await crypto.subtle.digest('SHA-256', passwordHash)
+        passwordHash = Array.from(new Uint8Array(passwordHash))
+        passwordHash = passwordHash.map(b => b.toString(16).padStart(2, '0')).join('')
         let res1 = await fetch('/api/signup', {
             method: 'POST',
             body: JSON.stringify({
                 login: email,
-                password: password
+                password: passwordHash
             })
         })
         let text1 = await res1.json()

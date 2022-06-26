@@ -15,11 +15,16 @@
     })
     async function handleLogin() {
         if (email == '' || password == '') return
+        let passwordHash = email.concat(password)
+        passwordHash = new TextEncoder().encode(passwordHash)
+        passwordHash = await crypto.subtle.digest('SHA-256', passwordHash)
+        passwordHash = Array.from(new Uint8Array(passwordHash))
+        passwordHash = passwordHash.map(b => b.toString(16).padStart(2, '0')).join('')
         let res = await fetch('/api/login', {
             method: 'POST',
             body: JSON.stringify({
                 login: email,
-                password: password
+                password: passwordHash
             })
         })
         let text = await res.json()

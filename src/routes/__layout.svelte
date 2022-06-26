@@ -19,7 +19,7 @@
         display: none !important;
     }
     nav { 
-        padding: 1.5rem 3rem;
+        padding: 1.5rem 4rem;
         border-bottom: 2px solid var(--border-color);
         display: flex;
         justify-content: center;
