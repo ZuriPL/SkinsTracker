@@ -139,7 +139,9 @@
 <svelte:head>
     <title>SkinsTracker</title>
 </svelte:head>
+
 <SvelteToast options={{ intro: { x: -200 } }} />
+
 <nav class="{isOpen}">
     <section>
         <a href="/" style="text-decoration: none;">
