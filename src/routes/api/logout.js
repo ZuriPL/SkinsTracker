@@ -1,6 +1,6 @@
 import { serialize } from 'cookie'
 
-export async function get({ request }) {
+export async function get() {
 	return {
 		status: 302,
 		headers: {
