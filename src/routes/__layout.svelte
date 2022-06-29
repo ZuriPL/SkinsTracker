@@ -109,9 +109,17 @@
 <script>
     import { user } from '$lib/user.js' 
     import { onMount } from 'svelte'
+    import { beforeNavigate } from '$app/navigation'
     import { SvelteToast } from '@zerodevx/svelte-toast'
-
+    
     let isOpen = false
+    let mounted
+
+    onMount(() => mounted = true)
+
+    beforeNavigate(() => isOpen = false)
+
+    $: if($user == '' && mounted) checkUser()
 
     async function checkUser() {
         let res = await fetch('/api/validateSession')
@@ -126,14 +134,6 @@
             }
         }
 	}
-    let mounted
-    onMount(() => {
-        mounted = true
-    })
-
-    $: if($user == '' && mounted) {
-        checkUser()
-    }
 </script>
 
 <svelte:head>
@@ -168,9 +168,9 @@
         <section>
             <h2 class="menu-header">Site</h2>
             <ul>
-                <li><a href="/">About</a></li>
-                <li><a href="/">FAQ</a></li>
-                <li><a href="/">Help/Support</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/help">Help/Support</a></li>
             </ul>
         </section>
         <section>

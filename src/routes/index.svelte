@@ -42,7 +42,7 @@
         flex-direction: column;
         align-items: center;
     }
-    .main {
+    main {
         margin-top: 4rem;
         margin-bottom: 1rem;
     }
@@ -89,7 +89,7 @@
     }
 </style>
 
-<div class="center main">
+<main class="center">
 
     <h2>Your skins:</h2>
     
@@ -118,4 +118,4 @@
     <AddItem on:additem="{e => {
         items = [...items, e.detail]
     }}" />
-</div>
+</main>

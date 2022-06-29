@@ -132,8 +132,7 @@
 <script>
     import { user } from '$lib/user.js'
     import { goto } from '$app/navigation'
-    import myToast from '$lib/toast.js'
-    import { toast } from '@zerodevx/svelte-toast'
+    import toast from '$lib/toast.js'
     import { createEventDispatcher } from 'svelte'
 
     const dispatch = createEventDispatcher()
@@ -172,7 +171,7 @@
 
     async function handleAdd() {
         if ($user.skins.includes(id)) {
-            return myToast('Cannot add the same skin twice', true)
+            return toast('Cannot add the same skin twice', true)
         }
         document.querySelector('.add-popup-bg').classList.add('hide')
         dispatch('additem', {

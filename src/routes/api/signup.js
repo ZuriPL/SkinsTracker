@@ -1,5 +1,6 @@
 import clientPromise from '$lib/mongodb-client'
 import { ObjectId } from 'mongodb'
+import bcrypt from 'bcrypt'
 
 export async function post({ request }) {
 	const dbConnection = await clientPromise
@@ -21,7 +22,7 @@ export async function post({ request }) {
 
 	let newUser = {
 		email: body.login,
-		password: body.password,
+		password: await bcrypt.hash(body.password, 10),
 		skins: [],
 	}
 

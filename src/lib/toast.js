@@ -18,4 +18,6 @@ function toastWrapper(msg, dis = false) {
 	)
 }
 
+toastWrapper.pop = toast.pop
+
 export default toastWrapper
