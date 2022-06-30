@@ -40,9 +40,9 @@
         font-size: 2em;
         color: var(--text-color);
     }
-    a {
+    a, a:visited {
         text-underline-offset: 1px;
-        color: var(--link-color);
+        color: var(--link-color) !important;
     }
     .hamburger {
         all: unset;
