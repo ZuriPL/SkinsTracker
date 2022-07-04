@@ -38,7 +38,6 @@ export async function post({ request }) {
 	}
 
 	user.session = cookie
-	console.log(await bcrypt.hash('Kamil22@', 10))
 
 	return {
 		status: 200,

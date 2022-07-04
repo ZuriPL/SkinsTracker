@@ -28,6 +28,7 @@
             return toast({text: 'Invalid login or password'})
         }
         user.set(text)
+        toast.pop(0)
         if (urlParams.has('from')) {
             goto(urlParams.get('from'))
         } else {

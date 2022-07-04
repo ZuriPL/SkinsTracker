@@ -33,7 +33,8 @@
         let text2 = await res2.json()
 
         user.set(text2)
-
+        
+        toast.pop(0)
         goto('/')
     }
 </script>
