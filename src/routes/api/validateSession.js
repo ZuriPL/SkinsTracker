@@ -10,8 +10,6 @@ export async function get({ request }) {
 
 	let user = data.users.filter((user) => user.session == request.headers.get('cookie')?.split('=')[1])[0]
 
-	console.log(user)
-
 	if (user == undefined) {
 		return {
 			status: 200,
