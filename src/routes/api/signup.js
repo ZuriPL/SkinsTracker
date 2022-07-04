@@ -1,6 +1,6 @@
 import clientPromise from '$lib/mongodb-client'
 import { ObjectId } from 'mongodb'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 export async function post({ request }) {
 	const dbConnection = await clientPromise

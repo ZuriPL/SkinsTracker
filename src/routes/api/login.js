@@ -2,7 +2,7 @@ import clientPromise from '$lib/mongodb-client'
 import { ObjectId } from 'mongodb'
 import { serialize } from 'cookie'
 import { v4 as uuidv4 } from 'uuid'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 export async function post({ request }) {
 	const dbConnection = await clientPromise
