@@ -9,7 +9,7 @@
     
     async function handleSignUp() {
         if (email == '' || password == '') return
-        if (password != password2) return toast(`Passwords don't match`)
+        if (password != password2) return toast({text:`Passwords don't match`})
         let res1 = await fetch('/api/signup', {
             method: 'POST',
             body: JSON.stringify({
@@ -20,7 +20,7 @@
         let text1 = await res1.json()
         
         if (text1.error != undefined) {
-            return toast('User with this email already exists')
+            return toast({text:'User with this email already exists'})
         }
 
         let res2 = await fetch('/api/login', {

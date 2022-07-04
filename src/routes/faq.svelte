@@ -61,7 +61,7 @@
         <hr>
         <details>
             <summary>Is my password safe?</summary>
-            <p>Your passwords are stored in a databse hashed with the bcrypt algorythm, which is designed for storing passwords. If you still don't trust about safety of passwords, the project is open-sorce and can be found in <a href="https://github.com/ZuriPL/skinstracker-site">this repo</a>.</p>
+            <p>Your passwords are stored in a databse hashed with the bcrypt algorythm, which is designed for storing passwords. If you still don't trust about safety of passwords, the project is open-sorce and can be found in <a href="https://github.com/ZuriPL/skinstracker-site" target="_blank">this repo</a>.</p>
         </details>
     </div>
 </main>

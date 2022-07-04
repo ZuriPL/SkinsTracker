@@ -10,7 +10,7 @@
     onMount(() => {
         urlParams = new URLSearchParams(location.search)
         if (urlParams.has('reason') && urlParams.get('reason') === 'nologin') {
-            toast('Session expired, please log in')
+            toast({text: 'Session expired, please log in'})
         }
     })
     async function handleLogin() {
@@ -25,7 +25,7 @@
         })
         let text = await res.json()
         if (text.error != undefined) {
-            return toast('Invalid login or password')
+            return toast({text: 'Invalid login or password'})
         }
         user.set(text)
         if (urlParams.has('from')) {

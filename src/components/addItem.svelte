@@ -97,7 +97,7 @@
     #searchbar {
         outline: none;
         border: 2px solid var(--border-color);
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         width: 100%;
         padding: 0.5rem;
         font-size: 1em;
@@ -111,7 +111,7 @@
         padding: 0.5rem 1rem;
         background-color: var(--accent-color);
         color: white; /* ! */
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         margin-top: 1rem;
         display: grid;
         place-items: center;
@@ -171,7 +171,7 @@
 
     async function handleAdd() {
         if ($user.skins.includes(id)) {
-            return toast('Cannot add the same skin twice', true)
+            return toast({ text: 'Cannot add the same skin twice', dis: true})
         }
         document.querySelector('.add-popup-bg').classList.add('hide')
         dispatch('additem', {
