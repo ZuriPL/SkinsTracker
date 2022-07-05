@@ -109,7 +109,7 @@
         </div>
         {/if}
     </div>
-    <button id="add-item" on:click="{showPopup}">
+    <button aria-label="Add an item" id="add-item" on:click="{showPopup}">
         <svg style="width:33px;height:33px" viewBox="0 0 24 24">
             <path fill="white" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
         </svg>

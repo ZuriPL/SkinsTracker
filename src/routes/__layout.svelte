@@ -147,7 +147,7 @@
         <a href="/" style="text-decoration: none;">
             <h1>SkinsTracker</h1>
         </a>
-        <button class="hamburger" on:click="{() => {
+        <button class="hamburger" aria-label="toggle menu" on:click="{() => {
             isOpen ? isOpen = '' : isOpen = 'open'
         }}">
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
