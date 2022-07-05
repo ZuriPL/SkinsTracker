@@ -94,7 +94,7 @@
     <h2>Your skins:</h2>
     
     <div class="slots-grid">
-        {#if $user == ''} 
+        {#if $user == '' || (items.length == 0 && $user.skins.length != 0)} 
             <div class="spinner-container">
                 <img src="/loading.gif" alt="loading spinner">
             </div>
