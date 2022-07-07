@@ -170,7 +170,6 @@
         handleNetworkChange()
         window.addEventListener("online", handleNetworkChange);
         window.addEventListener("offline", handleNetworkChange);
-        document.body.classList.add("offline");
         }
     )
 
