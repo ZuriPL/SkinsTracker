@@ -132,6 +132,8 @@
     .offline-wrapper hr {
         margin-block: 0.5rem;
         background-color: black;
+        height: 1px;
+        border: none;
     }
     .offline-wrapper:hover .offline-msg {
         display: block;
@@ -147,7 +149,7 @@
     
     let isOpen = false
     let mounted
-
+    
     onMount(() => { 
         mounted = true
 
@@ -158,7 +160,8 @@
                 document.body.classList.add("offline");
             }
         }
-
+        
+        handleNetworkChange()
         window.addEventListener("online", handleNetworkChange);
         window.addEventListener("offline", handleNetworkChange);
         }

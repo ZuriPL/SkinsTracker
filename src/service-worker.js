@@ -67,7 +67,6 @@ worker.addEventListener('fetch', (event) => {
 	const skipBecauseUncached = event.request.cache === 'only-if-cached' && !isStaticAsset
 
 	if (isHttp && !isDevServerRequest && !skipBecauseUncached) {
-		// console.log(event)
 		event.respondWith(
 			(async () => {
 				// always serve static files and bundler-generated assets from cache.
