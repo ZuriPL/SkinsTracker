@@ -6,8 +6,7 @@
       {
         "src": "favicon_512.png",
         "type": "image/png",
-        "sizes": "512x512",
-        "purpose": "maskable"
+        "sizes": "512x512"
       },
       {
         "src": "favicon_192.png",
@@ -18,9 +17,27 @@
         "src": "favicon_128.png",
         "type": "image/png",
         "sizes": "128x128"
+      },
+      {
+        "src": "favicon_512_maskable.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "maskable"
+      },
+      {
+        "src": "favicon_192_maskable.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "maskable"
+      },
+      {
+        "src": "favicon_128_maskable.png",
+        "type": "image/png",
+        "sizes": "128x128",
+        "purpose": "maskable"
       }
     ],
-    "background_color": "#000000",
+    "background_color": "#ffffff",
     "display": "standalone",
     "scope": "/",
     "theme_color": "#5f91f0",
