@@ -19,7 +19,7 @@
         display: none !important;
     }
     nav { 
-        padding: 1.5rem 4rem;
+        padding: 1.5rem 3rem;
         border-bottom: 2px solid var(--border-color);
         display: flex;
         justify-content: center;
@@ -32,7 +32,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: min(100vw, 750px);
+        width: min(100vw, 700px);
         background-color: var(--background-color);
         z-index: 1;
     }
@@ -58,7 +58,7 @@
         left: 0;
         bottom: 1px;
         border-bottom: 2px solid var(--border-color);
-        padding: 1.5rem max(calc(calc(100vw - 750px) / 2), 4rem);
+        padding: 1.5rem max(calc(calc(100vw - 700px) / 2), 3rem);
         transition: transform 500ms cubic-bezier(0.33, -0.01, 0.29, 0.99);
         width: 100%;
         background-color: white;
@@ -111,15 +111,21 @@
     }
     .offline-msg {
         position: absolute;
-        left: 50%;
-        bottom: -1rem;
+        right: 50%;
+        bottom: -15px;
+        transform: translateY(100%) translateX(50%);
         background-color: var(--background-color);
-        transform: translateY(100%) translateX(-50%);
         box-shadow: 2px 2px 6px hsla(0 0% 0% / 0.4);
         padding: 0.75rem;
         border-radius: 0.5rem;
         width: 30ch;
         display: none;
+    }
+    @media only screen and (max-width: 870px) {
+        .offline-msg {
+            right: 0;
+            transform: translateY(100%)  translateX(calc(3rem + 32px));
+        }
     }
     .offline-wrapper {
         visibility: hidden;
@@ -131,8 +137,8 @@
     }
     .offline-wrapper hr {
         margin-block: 0.5rem;
-        background-color: black;
-        height: 1px;
+        background-color: var(--border-color);
+        height: 2px;
         border: none;
     }
     .offline-wrapper:hover .offline-msg {
@@ -164,6 +170,7 @@
         handleNetworkChange()
         window.addEventListener("online", handleNetworkChange);
         window.addEventListener("offline", handleNetworkChange);
+        document.body.classList.add("offline");
         }
     )
 
