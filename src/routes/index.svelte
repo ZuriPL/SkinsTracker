@@ -78,9 +78,13 @@
         box-shadow: 2px 2px 6px hsla(0 0% 0% / 0.4);
         height: 33px;
         margin-top: 1.5rem;
+        color: white;
     }
     #add-item:hover {
         background-color: var(--accent-darker);
+    }
+    :global(.offline) #add-item {
+        visibility: hidden;
     }
     .spinner-container {
         display: grid;
@@ -111,7 +115,7 @@
     </div>
     <button aria-label="Add an item" id="add-item" on:click="{showPopup}">
         <svg style="width:33px;height:33px" viewBox="0 0 24 24">
-            <path fill="white" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
         </svg>
     </button>
 

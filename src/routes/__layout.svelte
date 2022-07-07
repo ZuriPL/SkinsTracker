@@ -104,6 +104,38 @@
     ul {
         margin-bottom: 2rem;
     }
+    .hamburger-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .offline-msg {
+        position: absolute;
+        left: 50%;
+        bottom: -1rem;
+        background-color: var(--background-color);
+        transform: translateY(100%) translateX(-50%);
+        box-shadow: 2px 2px 6px hsla(0 0% 0% / 0.4);
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        width: 30ch;
+        display: none;
+    }
+    .offline-wrapper {
+        visibility: hidden;
+        position: relative;
+        height: 24px;
+    }
+    :global(.offline) .offline-wrapper {
+        visibility: visible;
+    }
+    .offline-wrapper hr {
+        margin-block: 0.5rem;
+        background-color: black;
+    }
+    .offline-wrapper:hover .offline-msg {
+        display: block;
+    }
 </style>
 
 <script>
@@ -111,11 +143,26 @@
     import { onMount } from 'svelte'
     import { beforeNavigate } from '$app/navigation'
     import { SvelteToast } from '@zerodevx/svelte-toast'
+
     
     let isOpen = false
     let mounted
 
-    onMount(() => mounted = true)
+    onMount(() => { 
+        mounted = true
+
+        function handleNetworkChange(_) {
+            if (navigator.onLine) {
+                document.body.classList.remove("offline");
+            } else {
+                document.body.classList.add("offline");
+            }
+        }
+
+        window.addEventListener("online", handleNetworkChange);
+        window.addEventListener("offline", handleNetworkChange);
+        }
+    )
 
     beforeNavigate(() => isOpen = false)
 
@@ -147,13 +194,25 @@
         <a href="/" style="text-decoration: none;">
             <h1>SkinsTracker</h1>
         </a>
-        <button class="hamburger" aria-label="toggle menu" on:click="{() => {
-            isOpen ? isOpen = '' : isOpen = 'open'
-        }}">
+        <div class="hamburger-wrapper">
+            <div class="offline-wrapper">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="black" d="M3.27,1.44L2,2.72L4.05,4.77C2.75,5.37 1.5,6.11 0.38,7C4.2,11.8 8.14,16.67 12,21.5L15.91,16.63L19.23,19.95L20.5,18.68C14.87,13.04 3.27,1.44 3.27,1.44M12,3C10.6,3 9.21,3.17 7.86,3.5L9.56,5.19C10.37,5.07 11.18,5 12,5C15.07,5 18.09,5.86 20.71,7.45L16.76,12.38L18.18,13.8C20.08,11.43 22,9 23.65,7C20.32,4.41 16.22,3 12,3M5.57,6.29L14.5,15.21L12,18.3L3.27,7.44C4,7 4.78,6.61 5.57,6.29Z" />
+                </svg>
+                <div class="offline-msg">
+                    <h2>You are offline</h2>
+                    <hr>
+                    <p>In offline mode the functionality is limited and data might be old</p>
+                </div>
+            </div>
+            <button class="hamburger" aria-label="toggle menu" on:click="{() => {
+                isOpen ? isOpen = '' : isOpen = 'open'
+            }}">
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
             </svg>
         </button>
+    </div>
     </section>
     <div class="menu">
         <section>
