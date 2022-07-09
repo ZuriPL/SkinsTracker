@@ -2,24 +2,27 @@
     import { user } from '$lib/user'
     import { goto } from '$app/navigation'
     import toast from '$lib/toast.js'
+    let oldPassword
     let password
+    let confirmPassword
 
-    async function handleDelete() {
-        if (!password) return
+    async function handleChange() {
+        if (!password || !oldPassword || password != confirmPassword) return
         
-        let res = await fetch('/api/delete-account', {
+        let res = await fetch('/api/change-password', {
             method: 'POST',
             body: JSON.stringify({
-                password: password
+                oldPassword,
+                password
             })
         })
-        let text = await res.json()
-        if (text.error != undefined) {
-            return toast({text: text.error})
+        let data = await res.json()
+        if (data.error != undefined) {
+            return toast({text: data.error})
         }
         toast.pop(0)
-        await fetch('/api/logout')
-        goto('/signup')
+        user.set(data.user)
+        goto('/')
     }
 </script>
 
@@ -67,13 +70,13 @@
     button {
         all: unset;
         padding: 0.5rem 1rem;
-        background-color: hsl(0, 83%, 55%);
+        background-color: var(--accent-color);
         color: white;
         border-radius: 0.5rem;
         margin-top: 1rem;
     }
     button:hover {
-        background-color: hsl(0, 70%, 50%);
+        background-color: var(--accent-darker);
     }
     input.disabled {
         background-color: hsl(0, 0%, 90%);
@@ -85,17 +88,20 @@
 
 <div class="center main">
 
-    <h2>Delete account</h2>
+    <h2>Change password</h2>
     
     <form class="form-container">
-        <p>Are you sure you want to delete your account?</p>
-        <p><strong>Note: </strong>This action cannot be undone.</p>
+        <p>Are you sure you want to change your password?</p>
         <br>
-        <label for="email">Email:</label>
-        <input value={$user.email} type="email" id="email" class="disabled" disabled />
-        <label for="pass">Confirm password:</label>
-        <input bind:value={password} autocomplete="current-password" type="password" id="pass" />
+        <label for="email-old">Email:</label>
+        <input value={$user.email} type="email" id="email-old" class="disabled" disabled/>
+        <label for="pass-old">Old password:</label>
+        <input bind:value={oldPassword} type="password" id="pass-old" autocomplete="current-password"/>
+        <label for="pass">New password:</label>
+        <input bind:value={password} autocomplete="new-password" type="password" id="pass" />
+        <label for="pass-new">Confirm password:</label>
+        <input bind:value={confirmPassword} autocomplete="new-password" type="password" id="pass-new" />
 
-        <button on:click|preventDefault="{handleDelete}">Confirm</button>
+        <button on:click|preventDefault="{handleChange}">Confirm</button>
     </form>
 </div>
