@@ -230,7 +230,7 @@
                 <li><a href="/">Change email</a></li>
                 <li><a href="/">Change password</a></li>
                 <li><a href="/api/logout">Log out</a></li>
-                <li><a href="/">Delete account</a></li>
+                <li><a href="/delete-account">Delete account</a></li>
             </ul>
         </section>
         <section>
