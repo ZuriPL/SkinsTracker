@@ -4,9 +4,9 @@
     "start_url": "/",
     "icons": [
       {
-        "src": "favicon_512.png",
+        "src": "favicon_256.png",
         "type": "image/png",
-        "sizes": "512x512"
+        "sizes": "256x256"
       },
       {
         "src": "favicon_192.png",
@@ -14,26 +14,15 @@
         "sizes": "192x192"
       },
       {
-        "src": "favicon_128.png",
+        "src": "favicon_maskable_256.png",
         "type": "image/png",
-        "sizes": "128x128"
-      },
-      {
-        "src": "favicon_512_maskable.png",
-        "type": "image/png",
-        "sizes": "512x512",
+        "sizes": "256x256",
         "purpose": "maskable"
       },
       {
-        "src": "favicon_192_maskable.png",
+        "src": "favicon_maskable_192.png",
         "type": "image/png",
         "sizes": "192x192",
-        "purpose": "maskable"
-      },
-      {
-        "src": "favicon_128_maskable.png",
-        "type": "image/png",
-        "sizes": "128x128",
         "purpose": "maskable"
       }
     ],

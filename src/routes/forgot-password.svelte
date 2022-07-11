@@ -2,9 +2,7 @@
     import { user } from '$lib/user'
     import { goto } from '$app/navigation'
     import toast from '$lib/toast.js'
-    let oldPassword
-    let password
-    let confirmPassword
+    let code
 
     async function handleChange() {
         if (!password || !oldPassword || password != confirmPassword) return
@@ -100,16 +98,11 @@
     <h2>Change password</h2>
     
     <form class="form-container">
-        <p>Are you sure you want to change your password?</p>
+        <p>We sent an email with a recovery link to <strong>{$user.email}</strong></p>
         <br>
-        <label for="email-old">Email:</label>
-        <input value={$user.email} type="email" id="email-old" class="disabled" disabled/>
-        <label for="pass-old">Old password:</label>
-        <input bind:value={oldPassword} type="password" id="pass-old" autocomplete="current-password"/>
-        <label for="pass">New password:</label>
-        <input bind:value={password} autocomplete="new-password" type="password" id="pass" />
-        <label for="pass-new">Confirm password:</label>
-        <input bind:value={confirmPassword} autocomplete="new-password" type="password" id="pass-new" />
+        
+        <label for="pass-new">Code:</label>
+        <input bind:value={code} autocomplete="off" type="text" id="code" />
 
         <button on:click|preventDefault="{handleChange}">Confirm</button>
     </form>
