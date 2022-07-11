@@ -22,6 +22,12 @@
         user.set(data.user)
         goto('/')
     }
+
+    function handleInput(e) {
+        e.preventDefault()
+        if (Number.isNaN(+e.key) || e.target.value.length >= 6) return
+        e.target.value += e.key
+    }
 </script>
 
 
@@ -56,11 +62,13 @@
         flex-direction: column;
     }
     input {
-        width: 100%;
+        font-size: 2rem;
         border-radius: 0.4rem;
         border: 2px solid var(--border-color);
         outline: none;
         padding: 0.25rem;
+        box-sizing: content-box;
+        width: 6ch;
     }
     input:focus {
         border: 2px solid var(--accent-color);
@@ -76,10 +84,6 @@
     button:hover {
         background-color: var(--accent-darker);
     }
-    input.disabled {
-        background-color: hsl(0, 0%, 90%);
-        color: hsl(0, 0%, 40%)
-    }
     .link {
         color: var(--link-color);
         margin-top: 0.75rem;
@@ -88,6 +92,15 @@
     }
     .link:hover {
         color: #175dcf;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
     }
 </style>
 
@@ -102,7 +115,7 @@
         <br>
         
         <label for="pass-new">Code:</label>
-        <input bind:value={code} autocomplete="off" type="text" id="code" />
+        <input bind:value={code} on:keypress="{handleInput}" autocomplete="off" type="number" id="code" />
 
         <button on:click|preventDefault="{handleChange}">Confirm</button>
     </form>
