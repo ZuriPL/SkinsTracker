@@ -14,6 +14,7 @@
         --link-color: #487ad6;
 
         color: var(--text-color);
+        /* color: hsl(217, 70%, 49%); */
     }
     :global(.hide) {
         display: none !important;

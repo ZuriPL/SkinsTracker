@@ -41,12 +41,10 @@
         margin-bottom: 3rem;
         font-family: 'Roboto', sans-serif;
     }
-    .center {
+    main {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-    .main {
         margin-top: 5rem;
     }
     .form-container {
@@ -88,7 +86,7 @@
 
 
 
-<div class="center main">
+<main>
 
     <h2>Recover password</h2>
     
@@ -98,6 +96,7 @@
     
         <label for="first-input">Code:</label>
         <SegmentedInput length="{6}" bind:code="{code}" />
+        {code}
         <br>
 
         <label for="pass">New password:</label>
@@ -111,5 +110,5 @@
             <button on:click|preventDefault="{handleSubmit}">Confirm</button>
         {/if}
     </form>
-</div>
+</main>
 

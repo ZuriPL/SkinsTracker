@@ -50,12 +50,10 @@
         margin-bottom: 3rem;
         font-family: 'Roboto', sans-serif;
     }
-    .center {
+    main {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-    .main {
         margin-top: 5rem;
     }
     .form-container {
@@ -102,7 +100,7 @@
 
 
 
-<div class="center main">
+<main>
 
     <h2>Log In</h2>
     
@@ -116,4 +114,4 @@
     </div>
 
     <a href="/signup" class="link">Don't have an account? Sign Up</a>
-</div>
+</main>

@@ -36,12 +36,10 @@
         margin-bottom: 3rem;
         font-family: 'Roboto', sans-serif;
     }
-    .center {
+    main {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-    .main {
         margin-top: 5rem;
     }
     .form-container {
@@ -83,7 +81,7 @@
 
 
 
-<div class="center main">
+<main>
 
     <h2>Delete account</h2>
     
@@ -98,4 +96,4 @@
 
         <button on:click|preventDefault="{handleDelete}">Confirm</button>
     </form>
-</div>
+</main>

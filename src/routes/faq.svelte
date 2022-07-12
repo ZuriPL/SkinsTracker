@@ -3,14 +3,11 @@
         font-size: 4rem;
         margin-bottom: 2rem;
     }
-    .center {
+    main {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-    main {
-        margin-top: 4rem;
-        margin-bottom: 1rem;
+        margin-top: 5rem;
     }
     .slots-grid {
         border: 2px solid var(--border-color);
@@ -45,7 +42,7 @@
     }
 </style>
 
-<main class="center">
+<main>
     <h2>FAQ</h2>
 
     <div class="slots-grid">

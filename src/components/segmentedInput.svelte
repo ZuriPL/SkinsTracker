@@ -18,16 +18,16 @@
     function handleMoveAndBackspace(e) {
         let targetIndex = +e.target.getAttribute('index')
 
-        switch(e.keyCode) {
-            case 39: //ArrowRight
+        switch(e.key) {
+            case 'ArrowRight': //ArrowRight
                 e.preventDefault()
                 els[min((length - 1), targetIndex + 1)].focus()
                 break
-            case 37: //ArrowLeft
+            case 'ArrowLeft': //ArrowLeft
                 e.preventDefault()
                 els[max(0, targetIndex - 1)].focus()
                 break
-            case 8: //Backspace
+            case 'Backspace': //Backspace
                 e.preventDefault()
 
                 // if curent cell is empty we want to backspace the previous cell
@@ -79,12 +79,27 @@
         if (a > b) return a
         return b
     }
+
+    function getTotalLength(idx, arr) {
+        return arr.slice(0, idx).reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+    }
 </script>
 
 <section class="input-wrapper">
-    {#each range(length) as index}
-        <input id="{index == 0 ? 'first-input' : ''}" type="number" on:keydown="{handleMoveAndBackspace}" on:keypress|preventDefault="{handleKey}" on:paste|preventDefault="{handlePaste}" bind:this="{els[index]}" bind:value="{values[index]}" index="{index}">
-    {/each}
+    {#if Array.isArray(length)}
+        {#each length as part, idx}
+            {#if idx != 0}
+                <span>-</span>
+            {/if}
+            {#each range(part) as index}
+                <input id="{index == 0 ? 'first-input' : ''}" type="number" on:keydown="{handleMoveAndBackspace}" on:keypress|preventDefault="{handleKey}" on:paste|preventDefault="{handlePaste}" bind:this="{els[index + getTotalLength(idx, length)]}" bind:value="{values[index + getTotalLength(idx,length)]}" index="{index + getTotalLength(idx, length)}">
+            {/each}
+        {/each}
+    {:else}
+        {#each range(length) as index}
+            <input id="{index == 0 ? 'first-input' : ''}" type="number" on:keydown="{handleMoveAndBackspace}" on:keypress|preventDefault="{handleKey}" on:paste|preventDefault="{handlePaste}" bind:this="{els[index]}" bind:value="{values[index]}" index="{index}">
+        {/each}
+    {/if}
 </section>
 
 <style>
@@ -92,6 +107,9 @@
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
     }
 
     /* STYLING */
@@ -106,6 +124,9 @@
     }
     input:focus {
         border: 2px solid var(--accent-color);
+    }
+    span {
+        font-weight: bold;
     }
     .input-wrapper {
         display: flex;

@@ -3,14 +3,11 @@
         font-size: 4rem;
         margin-bottom: 2rem;
     }
-    .center {
+    main {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-    main {
-        margin-top: 4rem;
-        margin-bottom: 1rem;
+        margin-top: 5rem;
     }
     .slots-grid {
         border: 2px solid var(--border-color);
@@ -64,7 +61,7 @@
     }
 </style>
 
-<main class="center">
+<main>
     <h2>Help</h2>
 
     <div class="slots-grid">
@@ -86,13 +83,17 @@
     let title
     let content 
 
-    function handleForm() {
-        let data = {
+    async function handleForm() {
+        let payload = {
             title,
             content,
             email: $user.email
         }
-        console.log(data)
         toast({ text: 'Succesfully submitted an issue', type: 'info' })
+        let res = await fetch('/api/submit-form', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        })
+        let data = await res.json()
     }
 </script>
