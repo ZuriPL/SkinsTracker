@@ -103,7 +103,7 @@
         <p>Are you sure you want to change your password?</p>
         <br>
         <label for="email-old">Email:</label>
-        <input value={$user.email} type="email" id="email-old" class="disabled" disabled/>
+        <input value={$user?.email} type="email" id="email-old" class="disabled" disabled/>
         <label for="pass-old">Old password:</label>
         <input bind:value={oldPassword} type="password" id="pass-old" autocomplete="current-password"/>
         <label for="pass">New password:</label>

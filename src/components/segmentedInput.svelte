@@ -42,15 +42,12 @@
     }
     
     function handleKey(e) {
-        if (e.keyCode === 8 ) return
-        e.preventDefault()
         if (Number.isNaN(+e.key)) return
         values[e.target.getAttribute('index')] = +e.key
         els[min((length - 1), +e.target.getAttribute('index') + 1)].focus()
     }
     
     function handlePaste(e) {
-        e.preventDefault()
         if (Number.isNaN(+e.clipboardData.getData('text'))) return 
         waterfall({target: e.target, arr: e.clipboardData.getData('text')})
     }
@@ -86,7 +83,7 @@
 
 <section class="input-wrapper">
     {#each range(length) as index}
-        <input id="{index == 0 ? 'first-input' : ''}" type="number" on:keydown="{handleMoveAndBackspace}" on:keypress="{handleKey}" on:paste="{handlePaste}" bind:this="{els[index]}" bind:value="{values[index]}" index="{index}">
+        <input id="{index == 0 ? 'first-input' : ''}" type="number" on:keydown="{handleMoveAndBackspace}" on:keypress|preventDefault="{handleKey}" on:paste|preventDefault="{handlePaste}" bind:this="{els[index]}" bind:value="{values[index]}" index="{index}">
     {/each}
 </section>
 

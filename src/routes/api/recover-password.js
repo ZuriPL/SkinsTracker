@@ -15,10 +15,10 @@ export async function post({ request }) {
 
 	let user = data.users.filter((user) => user.session == request.headers.get('cookie')?.split('=')[1])[0]
 
-	if (user == undefined || !(await bcrypt.compare(body.oldPassword, user.password))) {
+	if (user == undefined || user.recovery.code != body.code || new Date() > user.recovery.expire) {
 		return {
 			status: 200,
-			body: { error: 'Invalid password' },
+			body: { error: 'Invalid or expired code' },
 		}
 	}
 
@@ -30,6 +30,7 @@ export async function post({ request }) {
 			$set: {
 				'users.$.password': await bcrypt.hash(body.password, 10),
 				'users.$.session': cookie,
+				'users.$.recovery': undefined,
 			},
 		}
 	)
