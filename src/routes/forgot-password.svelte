@@ -1,6 +1,7 @@
 <script>
     import { user } from '$lib/user'
     import { goto } from '$app/navigation'
+    import SegmentedInput from '../components/segmentedInput.svelte';
     import toast from '$lib/toast.js'
     let code
 
@@ -21,12 +22,6 @@
         toast.pop(0)
         user.set(data.user)
         goto('/')
-    }
-
-    function handleInput(e) {
-        e.preventDefault()
-        if (Number.isNaN(+e.key) || e.target.value.length >= 6) return
-        e.target.value += e.key
     }
 </script>
 
@@ -61,18 +56,6 @@
         gap: 0.5rem;
         flex-direction: column;
     }
-    input {
-        font-size: 2rem;
-        border-radius: 0.4rem;
-        border: 2px solid var(--border-color);
-        outline: none;
-        padding: 0.25rem;
-        box-sizing: content-box;
-        width: 6ch;
-    }
-    input:focus {
-        border: 2px solid var(--accent-color);
-    }
     button {
         all: unset;
         padding: 0.5rem 1rem;
@@ -84,23 +67,9 @@
     button:hover {
         background-color: var(--accent-darker);
     }
-    .link {
-        color: var(--link-color);
-        margin-top: 0.75rem;
-        font-size: 0.85rem;
-        text-underline-offset: 1px;
-    }
-    .link:hover {
-        color: #175dcf;
-    }
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
-
-    /* Firefox */
-    input[type=number] {
-      -moz-appearance: textfield;
+    button[disabled] {
+        background-color: var(--border-color) !important;
+        color: hsl(0, 0%, 40%) !important;
     }
 </style>
 
@@ -108,17 +77,20 @@
 
 <div class="center main">
 
-    <h2>Change password</h2>
+    <h2>Recover password</h2>
     
     <form class="form-container">
         <p>We sent an email with a recovery link to <strong>{$user.email}</strong></p>
         <br>
         
-        <label for="pass-new">Code:</label>
-        <input bind:value={code} on:keypress="{handleInput}" autocomplete="off" type="number" id="code" />
+        <label for="first-input">Code:</label>
+        <SegmentedInput length="{6}" bind:code="{code}" />
 
-        <button on:click|preventDefault="{handleChange}">Confirm</button>
+        {#if code == 'typing'}
+            <button on:click|preventDefault="{handleChange}" disabled>Confirm</button>
+        {:else}
+            <button on:click|preventDefault="{handleChange}">Confirm</button>
+        {/if}
     </form>
-
-    <a href="/forgot-password" class="link">Forgot your password?</a>
 </div>
+
