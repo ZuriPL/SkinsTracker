@@ -21,6 +21,7 @@
 		"dotenv": "^16.0.1",
 		"mongodb": "^4.6.0",
 		"nodemailer": "^6.7.7",
+		"svelte-segmented-input": "^1.2.1",
 		"uuid": "^8.3.2",
 		"web-push": "^3.5.0"
 	}
