@@ -6,6 +6,7 @@
     let code
 
     async function handleChange() {
+        return
         if (!password || !oldPassword || password != confirmPassword) return
         
         let res = await fetch('/api/change-password', {
