@@ -96,7 +96,6 @@
     
         <label for="first-input">Code:</label>
         <SegmentedInput length="{6}" bind:value="{code}" />
-        {code}
         <br>
 
         <label for="pass">New password:</label>
