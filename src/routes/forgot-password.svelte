@@ -95,7 +95,7 @@
         <br>
     
         <label for="first-input">Code:</label>
-        <SegmentedInput length="{6}" bind:code="{code}" />
+        <SegmentedInput length="{6}" bind:value="{code}" />
         {code}
         <br>
 

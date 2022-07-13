@@ -1,17 +1,28 @@
 <script>
+    import { onMount } from "svelte/internal";
+
     export let length
     let els = []
     let values = []
-    export let code = 'typing'
+    export let value = 'typing'
+    export let style
+
+    let varNames = Object.keys(style)
+
+    onMount(() => {
+        for (let i = 0; i < varNames.length; i++) {
+            document.body.style.setProperty(`--${varNames[i]}`, style[varNames[i]]);
+        }
+    })
     
     $: {
         (() => {
-            if (values.length != length || values.includes(null)) return code = 'typing'
-            code = 0
-            values.forEach((value, index) => {
-                code += value * (10 ** (length - index - 1))
+            if (values.length != length || values.includes(null)) return value = 'typing'
+            value = 0
+            values.forEach((digit, index) => {
+                value += digit * (10 ** (length - index - 1))
             })
-            code = code.toString().padStart(length, '0')
+            value = value.toString().padStart(length, '0')
         })()
     }
 
@@ -109,29 +120,31 @@
         -webkit-appearance: none;
     }
     input[type=number] {
-        -moz-appearance: textfield;
+        -moz-appearance: textfield; 
     }
 
     /* STYLING */
     input {
-        font-size: 2rem;
-        border-radius: 0.4rem;
-        border: 2px solid var(--border-color);
+        font-size: var(--fontSize, 2rem);
+        border-radius: var(--borderRadius, 0.4rem);
+        border: var(--borderWidth, 2px) solid var(--borderColor, #e5e5e5);
         outline: none;
-        padding: 0.25rem 1rem;
+        padding: var(--padding, 0.25rem 1rem);
         box-sizing: content-box;
         width: 1ch;
+        background-color: var(--bgInput, transparent);
     }
     input:focus {
-        border: 2px solid var(--accent-color);
+        border: var(--borderWidth, 2px) solid var(--borderColorActive, #5f91f0);
     }
     span {
-        font-weight: bold;
+        font-weight: var(--fontWeight, bold);
     }
     .input-wrapper {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
+        width: var(--inputWidth, 100%);
+        background-color: var(--bgWrapper, transparent);
     }
 </style>

@@ -228,25 +228,26 @@
         <section>
             <h2 class="menu-header">Account</h2>
             <ul>
+                <li><a href="/api/logout">Log out</a></li>
                 <li><a href="/change-email">Change email</a></li>
                 <li><a href="/change-password">Change password</a></li>
-                <li><a href="/api/logout">Log out</a></li>
                 <li><a href="/delete-account">Delete account</a></li>
             </ul>
         </section>
         <section>
             <h2 class="menu-header">Site</h2>
             <ul>
+                <li><a href="/help">Help/Support</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/faq">FAQ</a></li>
-                <li><a href="/help">Help/Support</a></li>
             </ul>
         </section>
         <section>
             <h2 class="menu-header">Contact</h2>
             <ul>
-                <li><a href="/">Twitter</a></li>
-                <li><a href="/">Discord</a></li>
+                <li><a href="https://discord.com/users/432899203157458962" target="_blank">Discord</a></li>
+                <li><a href="https://twitter.com/ZuriPOL" target="_blank">Twitter</a></li>
+                <li><a href="https://github.com/ZuriPL" target="_blank">GitHub</a></li>
             </ul>
         </section>
     </div>
