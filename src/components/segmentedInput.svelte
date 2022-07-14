@@ -5,12 +5,13 @@
     let els = []
     let values = []
     export let value = 'typing'
-    export let style
+    export let style = {}
 
     let varNames = Object.keys(style)
 
     onMount(() => {
         for (let i = 0; i < varNames.length; i++) {
+            console.log(i)
             document.body.style.setProperty(`--${varNames[i]}`, style[varNames[i]]);
         }
     })

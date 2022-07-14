@@ -2,7 +2,8 @@
     import { user } from '$lib/user'
     import { goto } from '$app/navigation'
     import { onMount } from 'svelte'
-    import SegmentedInput from 'svelte-segmented-input';
+    // import SegmentedInput from 'svelte-segmented-input';
+    import SegmentedInput from '../components/segmentedInput.svelte';
     import toast from '$lib/toast.js'
 
     let code
