@@ -10,6 +10,7 @@ export async function get({ params }) {
 		credentials: 'include',
 		mode: 'cors',
 	})
+
 	let response = await data.json()
 
 	return {
