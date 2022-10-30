@@ -152,8 +152,10 @@
     import { onMount } from 'svelte'
     import { beforeNavigate } from '$app/navigation'
     import { SvelteToast } from '@zerodevx/svelte-toast'
+    import { inject } from '@vercel/analytics'
 
-    
+    inject()
+
     let isOpen = false
     let mounted
     
